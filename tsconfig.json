@@ -8,6 +8,7 @@
     "module": "ESNext",
     // В какую спецификацию компилируем: для поддержки большинства браузеров
     "target": "es5",
+    // Чтобы в коде не надо было писать import React from 'react' - начиная с 17 версии реакта
     "jsx": "react-jsx",
     // Компилятор будет обрабатывать не только TS файлы, но и JS файлы
     "allowJs": true,
@@ -38,9 +39,5 @@
       "module": "CommonJS"
     }
   },
-  "include": [
-    "./config/jest/setupTests.ts",
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-  ]
+  "include": ["./config/jest/setupTests.ts", "./src/**/*.ts", "./src/**/*.tsx"]
 }
