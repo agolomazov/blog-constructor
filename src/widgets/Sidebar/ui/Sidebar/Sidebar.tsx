@@ -2,10 +2,10 @@ import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 
 import AboutIcon from 'shared/assets/icons/about-20-20.svg';
-import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher';
+import { LangSwitcher } from 'widgets/LangSwitcher';
 import MainIcon from 'shared/assets/icons/main-20-20.svg';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
+import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
