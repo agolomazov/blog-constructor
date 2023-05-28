@@ -4,11 +4,7 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:i18next/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'plugin:i18next/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -17,11 +13,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'i18next',
-  ],
+  plugins: ['react', '@typescript-eslint', 'i18next', 'react-hooks'],
   rules: {
     'react/jsx-indent': [2, 2],
     'react/jsx-indent-props': [2, 2],
@@ -50,7 +42,11 @@ module.exports = {
     ],
     'max-len': ['error', { ignoreComments: true, code: 120 }],
     'comma-dangle': 'off',
-    'object-curly-newline': 'off'
+    'object-curly-newline': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
   },
   globals: {
     __IS_DEV__: true,
@@ -66,6 +62,7 @@ module.exports = {
       files: ['**/src/**/*.stories.{ts,tsx}'],
       rules: {
         'react/jsx-props-no-spreading': 'off',
+        'max-len': 'off'
       },
     },
   ],
