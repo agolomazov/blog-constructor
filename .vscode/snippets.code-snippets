@@ -27,5 +27,18 @@
       ""
     ],
     "description": "Create a React functional component using TypeScript and SCSS modules"
+  },
+  "Create unit test for unit test": {
+    "prefix": "runit",
+    "body": [
+      "import { DeepPartial } from '@reduxjs/toolkit';",
+      "import { StateSchema } from 'app/providers/StoreProvider';",
+      "",
+      "describe('$1', () => {",
+      "\ttest('$2', () => {",
+      "\t\texpect().toEqual();",
+      "\t});",
+      "});"
+    ]
   }
 }
