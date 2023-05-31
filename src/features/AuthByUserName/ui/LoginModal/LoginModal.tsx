@@ -1,18 +1,16 @@
-import { FC } from 'react';
-import { Modal } from 'shared/ui/Modal';
-import { classNames } from 'shared/lib/classNames';
+import { Modal } from 'shared/ui/Modal/Modal';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { LoginForm } from '../LoginForm/LoginForm';
-import cls from './LoginModal.module.scss';
 
-interface Props {
-  className?: string;
-  isOpen: boolean;
-  onClose: () => void;
+interface LoginModalProps {
+    className?: string;
+    isOpen: boolean;
+    onClose: () => void;
 }
 
-export const LoginModal: FC<Props> = ({ className, isOpen, onClose }) => (
+export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => (
   <Modal
-    className={classNames(cls.loginModal, {}, [className])}
+    className={classNames('', {}, [className])}
     isOpen={isOpen}
     onClose={onClose}
     lazy

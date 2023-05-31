@@ -1,33 +1,29 @@
-import {} from '@testing-library/jest-dom';
-
-import { fireEvent, screen } from '@testing-library/react';
-
+import { screen } from '@testing-library/react';
 import { componentRender } from 'shared/lib/tests/componentRender/componentRender';
+import { userEvent } from '@storybook/testing-library';
 import { Counter } from './Counter';
 
-describe('Button', () => {
-  test('Test render', () => {
+describe('Counter', () => {
+  test('test render', () => {
     componentRender(<Counter />, {
       initialState: { counter: { value: 10 } },
     });
-    expect(screen.getByTestId('value-title')).toBeInTheDocument();
+    expect(screen.getByTestId('value-title')).toHaveTextContent('10');
   });
 
-  test('Test increment', () => {
+  test('increment', () => {
     componentRender(<Counter />, {
       initialState: { counter: { value: 10 } },
     });
-    const incrementBtn = screen.getByTestId('increment-btn');
-    fireEvent.click(incrementBtn);
+    userEvent.click(screen.getByTestId('increment-btn'));
     expect(screen.getByTestId('value-title')).toHaveTextContent('11');
   });
 
-  test('Test decrement', () => {
+  test('decrement', () => {
     componentRender(<Counter />, {
       initialState: { counter: { value: 10 } },
     });
-    const decrementBtn = screen.getByTestId('decrement-btn');
-    fireEvent.click(decrementBtn);
+    userEvent.click(screen.getByTestId('decrement-btn'));
     expect(screen.getByTestId('value-title')).toHaveTextContent('9');
   });
 });
