@@ -28,15 +28,16 @@
     ],
     "description": "Create a React functional component using TypeScript and SCSS modules"
   },
-  "Create unit test for unit test": {
-    "prefix": "runit",
+  "Create unit test for redux selectors": {
+    "prefix": "ruselector",
     "body": [
       "import { DeepPartial } from '@reduxjs/toolkit';",
       "import { StateSchema } from 'app/providers/StoreProvider';",
       "",
       "describe('$1', () => {",
       "\ttest('$2', () => {",
-      "\t\texpect().toEqual();",
+      "\t\tconst state: DeepPartial<StateSchema> = {$3}",
+      "\t\texpect(state as StateSchema).toEqual($4);",
       "\t});",
       "});"
     ]
