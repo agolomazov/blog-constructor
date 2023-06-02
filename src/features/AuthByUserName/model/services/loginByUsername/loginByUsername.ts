@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { User, userActions } from 'entities/User';
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
-import { logger } from 'shared/lib/logger';
 
 interface LoginByUsernameProps {
   username: string;
@@ -27,7 +26,6 @@ export const loginByUsername = createAsyncThunk<
 
     return response.data;
   } catch (e) {
-    logger(e);
     return rejectWithValue('error');
   }
 });
