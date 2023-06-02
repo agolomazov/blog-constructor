@@ -28,7 +28,7 @@ export const Button = memo((props: ButtonProps) => {
   const {
     className,
     children,
-    theme,
+    theme = ButtonTheme.OUTLINE,
     square,
     disabled,
     size = ButtonSize.M,
@@ -37,9 +37,9 @@ export const Button = memo((props: ButtonProps) => {
 
   const mods: Record<string, boolean> = {
     [cls[theme]]: true,
-    [cls.square]: square,
+    [cls.square]: square || false,
     [cls[size]]: true,
-    [cls.disabled]: disabled,
+    [cls.disabled]: disabled || false,
   };
 
   return (

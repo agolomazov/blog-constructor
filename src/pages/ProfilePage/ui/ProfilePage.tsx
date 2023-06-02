@@ -1,6 +1,10 @@
-import { profileReducer } from 'entities/Profile';
-import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import {
+  fetchProfileData,
+  ProfileCard,
+  profileReducer,
+} from 'entities/Profile';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { classNames } from 'shared/lib/classNames';
 import {
   DynamicComponentLoader,
@@ -16,12 +20,16 @@ const reducers: ReducersList = {
 };
 
 const ProfilePage: FC<Props> = ({ className }) => {
-  const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProfileData());
+  }, [dispatch]);
 
   return (
     <DynamicComponentLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames('', {}, [className || ''])}>
-        {t('Profile page')}
+      <div className={classNames('', {}, [className])}>
+        <ProfileCard />
       </div>
     </DynamicComponentLoader>
   );

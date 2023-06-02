@@ -38,14 +38,14 @@ export const Input = memo((props: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (autoFocus) {
+    if (autoFocus && inputRef?.current) {
       setIsFocused(true);
       inputRef?.current.focus();
     }
   }, [autoFocus]);
 
   useEffect(() => {
-    if (autoFocus) {
+    if (autoFocus && inputRef?.current) {
       inputRef?.current.focus();
     }
   }, [autoFocus]);

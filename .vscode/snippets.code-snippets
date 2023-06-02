@@ -31,7 +31,6 @@
   "Create unit test for redux selectors": {
     "prefix": "ruselector",
     "body": [
-      "import { DeepPartial } from '@reduxjs/toolkit';",
       "import { StateSchema } from 'app/providers/StoreProvider';",
       "",
       "describe('$1', () => {",

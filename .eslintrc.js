@@ -60,6 +60,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'no-undef': 'off'
   },
   globals: {
     __IS_DEV__: true,

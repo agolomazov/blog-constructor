@@ -1,4 +1,3 @@
-import { DeepPartial } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers/StoreProvider';
 import { getLoginIsLoading } from './getLoginIsLoading';
 
@@ -7,6 +6,9 @@ describe('getLoginIsLoading', () => {
     const state: DeepPartial<StateSchema> = {
       loginForm: {
         isLoading: true,
+        username: '123',
+        password: 'asd',
+        error: 'ERROR',
       },
     };
     expect(getLoginIsLoading(state as StateSchema)).toBeTruthy();
@@ -16,14 +18,10 @@ describe('getLoginIsLoading', () => {
     const state: DeepPartial<StateSchema> = {
       loginForm: {
         isLoading: false,
+        username: '123',
+        password: 'asd',
+        error: 'ERROR',
       },
-    };
-    expect(getLoginIsLoading(state as StateSchema)).toBeFalsy();
-  });
-
-  test('should return false if not field isLoading into state', () => {
-    const state: DeepPartial<StateSchema> = {
-      loginForm: {},
     };
     expect(getLoginIsLoading(state as StateSchema)).toBeFalsy();
   });

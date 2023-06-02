@@ -26,7 +26,7 @@ export const Modal: FC<Props> = (props) => {
   }, [isOpen]);
 
   const mods: Record<string, boolean> = {
-    [cls.opened]: isOpen,
+    [cls.opened]: isOpen || false,
     [cls.isClosing]: isClosing,
   };
 

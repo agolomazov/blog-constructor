@@ -16,7 +16,9 @@ interface Props {
 
 export const Text = memo(({ className, title, text, theme }: Props) => (
   <div
-    className={classNames(cls.text, { [cls[theme]]: true }, [className || ''])}
+    className={classNames(cls.text, { [cls[theme || '']]: true }, [
+      className || '',
+    ])}
   >
     {title && <p className={cls.title}>{title}</p>}
     {text && <p className={cls.text}>{text}</p>}
