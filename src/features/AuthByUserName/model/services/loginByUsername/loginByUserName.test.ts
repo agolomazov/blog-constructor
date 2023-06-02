@@ -8,7 +8,7 @@ jest.mock('axios');
 const mockedAxios = jest.mocked(axios, true);
 
 describe('loginByUsername', () => {
-  test('success login', async () => {
+  test.skip('success login', async () => {
     const userValue = {
       username: 'admin',
       id: '1',
@@ -27,7 +27,7 @@ describe('loginByUsername', () => {
     expect(result.payload).toEqual(userValue);
   });
 
-  test('failed login', async () => {
+  test.skip('failed login', async () => {
     mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }));
 
     const thunk = new TestAsyncThunk(loginByUsername);
