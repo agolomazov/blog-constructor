@@ -7,12 +7,12 @@ import {
   useState,
 } from 'react';
 
-import { classNames } from 'shared/lib/classNames';
+import { classNames, Mods } from 'shared/lib/classNames';
 import cls from './Input.module.scss';
 
 type HTMLInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  'value' | 'onChange'
+  'value' | 'onChange' | 'readOnly'
 >;
 
 interface Props extends HTMLInputProps {
@@ -20,6 +20,7 @@ interface Props extends HTMLInputProps {
   value?: string;
   onChange?: (val: string) => void;
   autoFocus?: boolean;
+  readonly?: boolean;
 }
 
 export const Input = memo((props: Props) => {
@@ -30,6 +31,7 @@ export const Input = memo((props: Props) => {
     type = 'text',
     placeholder,
     autoFocus,
+    readonly,
     ...otherProps
   } = props;
 
@@ -73,8 +75,12 @@ export const Input = memo((props: Props) => {
     setCarretPosition(e?.target?.selectionStart);
   };
 
+  const mods: Mods = {
+    [cls.readonly]: readonly,
+  };
+
   return (
-    <div className={classNames(cls.inputWrapper, {}, [className])}>
+    <div className={classNames(cls.inputWrapper, mods, [className])}>
       {placeholder && (
         <div className={cls.placeholder} onClick={handleClickLabel}>
           {`${placeholder}>`}
@@ -90,9 +96,10 @@ export const Input = memo((props: Props) => {
           onFocus={onFocus}
           onBlur={onBlur}
           onSelect={onSelect}
+          readOnly={readonly}
           {...otherProps}
         />
-        {isFocused && (
+        {isFocused && !readonly && (
           <span
             className={cls.caret}
             style={{

@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { counterReducer } from 'entities/Counter';
 import { userReducer } from 'entities/User';
+import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import { NavigateOptions, To } from 'react-router-dom';
 import { $api } from 'shared/api/api';
 import { createReducerManager } from './reducerManager';
@@ -43,3 +44,5 @@ export function createReduxStore(
 }
 
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<StateSchema> = useSelector;

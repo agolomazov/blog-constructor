@@ -1,6 +1,6 @@
+import { useAppSelector } from 'app/providers/StoreProvider';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 import {
   DynamicComponentLoader,
@@ -30,10 +30,10 @@ const initialReducers: ReducersList = {
 const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const username = useSelector(getLoginUsername);
-  const password = useSelector(getLoginPassword);
-  const isLoading = useSelector(getLoginIsLoading);
-  const error = useSelector(getLoginError);
+  const username = useAppSelector(getLoginUsername);
+  const password = useAppSelector(getLoginPassword);
+  const isLoading = useAppSelector(getLoginIsLoading);
+  const error = useAppSelector(getLoginError);
 
   const onChangeUsername = useCallback(
     (value: string) => {

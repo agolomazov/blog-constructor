@@ -39,6 +39,11 @@
   animation: blink 0.75s ease-in 0.55s infinite;
 }
 
+.readonly {
+  opacity: 0.7;
+  cursor: default;
+}
+
 @keyframes blink {
   0% {
     opacity: 0;
