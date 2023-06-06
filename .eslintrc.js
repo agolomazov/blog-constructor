@@ -60,7 +60,8 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    'no-undef': 'off'
+    'no-undef': 'off',
+    'implicit-arrow-linebreak': 'off'
   },
   globals: {
     __IS_DEV__: true,

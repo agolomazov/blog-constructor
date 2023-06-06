@@ -1,4 +1,6 @@
 import { useAppSelector } from 'app/providers/StoreProvider';
+import { Country } from 'entities/Country';
+import { Currency } from 'entities/Currency';
 import {
   fetchProfileData,
   getProfileError,
@@ -41,7 +43,7 @@ const ProfilePage: FC<Props> = ({ className }) => {
     (value?: string) => {
       dispatch(
         profileActions.updateProfile({
-          first: value || '',
+          first: value,
         })
       );
     },
@@ -52,7 +54,7 @@ const ProfilePage: FC<Props> = ({ className }) => {
     (value?: string) => {
       dispatch(
         profileActions.updateProfile({
-          lastname: value || '',
+          lastname: value,
         })
       );
     },
@@ -63,7 +65,7 @@ const ProfilePage: FC<Props> = ({ className }) => {
     (value?: string) => {
       dispatch(
         profileActions.updateProfile({
-          city: value || '',
+          city: value,
         })
       );
     },
@@ -85,7 +87,7 @@ const ProfilePage: FC<Props> = ({ className }) => {
     (value?: string) => {
       dispatch(
         profileActions.updateProfile({
-          username: value || '',
+          username: value,
         })
       );
     },
@@ -96,7 +98,29 @@ const ProfilePage: FC<Props> = ({ className }) => {
     (value?: string) => {
       dispatch(
         profileActions.updateProfile({
-          avatar: value || '',
+          avatar: value,
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleChangeCurrency = useCallback(
+    (value?: Currency) => {
+      dispatch(
+        profileActions.updateProfile({
+          currency: value,
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleChangeCountry = useCallback(
+    (value?: Country) => {
+      dispatch(
+        profileActions.updateProfile({
+          country: value,
         })
       );
     },
@@ -118,6 +142,8 @@ const ProfilePage: FC<Props> = ({ className }) => {
           onChangeCity={handleChangeCity}
           onChangeAvatar={handleChangeAvatar}
           onChangeUsername={handleChangeUsername}
+          onChangeCurrency={handleChangeCurrency}
+          onChangeCountry={handleChangeCountry}
         />
       </div>
     </DynamicComponentLoader>

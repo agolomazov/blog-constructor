@@ -1,3 +1,5 @@
+import { Country, CountrySelect } from 'entities/Country';
+import { Currency, CurrencySelect } from 'entities/Currency';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames, Mods } from 'shared/lib/classNames';
@@ -16,12 +18,14 @@ interface Props {
   isLoading?: boolean;
   error?: string;
   readonly?: boolean;
-  onChangeFirstName: UpdateProfile;
-  onChangeLastName: UpdateProfile;
-  onChangeAge: UpdateProfile;
-  onChangeCity: UpdateProfile;
-  onChangeUsername: UpdateProfile;
-  onChangeAvatar: UpdateProfile;
+  onChangeFirstName?: UpdateProfile;
+  onChangeLastName?: UpdateProfile;
+  onChangeAge?: UpdateProfile;
+  onChangeCity?: UpdateProfile;
+  onChangeUsername?: UpdateProfile;
+  onChangeAvatar?: UpdateProfile;
+  onChangeCurrency?: (currency: Currency) => void;
+  onChangeCountry?: (country: Country) => void;
 }
 
 export const ProfileCard: FC<Props> = ({
@@ -36,6 +40,8 @@ export const ProfileCard: FC<Props> = ({
   onChangeCity,
   onChangeUsername,
   onChangeAvatar,
+  onChangeCurrency,
+  onChangeCountry,
 }) => {
   const { t } = useTranslation('profile');
 
@@ -101,11 +107,11 @@ export const ProfileCard: FC<Props> = ({
           readonly={readonly}
           onChange={onChangeAge}
         />
-        <Input
-          className={cls.input}
+        <CountrySelect
           value={data?.country}
-          placeholder={t('Страна проживания')}
-          readonly={readonly}
+          disabled={readonly}
+          onChange={onChangeCountry}
+          className={cls.input}
         />
         <Input
           className={cls.input}
@@ -123,16 +129,16 @@ export const ProfileCard: FC<Props> = ({
         />
         <Input
           className={cls.input}
-          value={data?.currency}
-          placeholder={t('Ваша валюта')}
-          readonly={readonly}
-        />
-        <Input
-          className={cls.input}
           value={data?.avatar}
           placeholder={t('Ваш аватар')}
           onChange={onChangeAvatar}
           readonly={readonly}
+        />
+        <CurrencySelect
+          value={data?.currency}
+          disabled={readonly}
+          className={cls.input}
+          onChange={onChangeCurrency}
         />
       </div>
     </div>
