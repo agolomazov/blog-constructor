@@ -1,11 +1,14 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from 'shared/lib/classNames';
+import { classNames, Mods } from 'shared/lib/classNames';
+import { Avatar } from 'shared/ui/Avatar';
 import { Input } from 'shared/ui/Input';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { Profile } from '../../model/types/profile';
 import cls from './ProfileCard.module.scss';
+
+type UpdateProfile = (value: string) => void;
 
 interface Props {
   className?: string;
@@ -13,6 +16,12 @@ interface Props {
   isLoading?: boolean;
   error?: string;
   readonly?: boolean;
+  onChangeFirstName: UpdateProfile;
+  onChangeLastName: UpdateProfile;
+  onChangeAge: UpdateProfile;
+  onChangeCity: UpdateProfile;
+  onChangeUsername: UpdateProfile;
+  onChangeAvatar: UpdateProfile;
 }
 
 export const ProfileCard: FC<Props> = ({
@@ -21,8 +30,18 @@ export const ProfileCard: FC<Props> = ({
   isLoading,
   error,
   readonly = true,
+  onChangeFirstName,
+  onChangeLastName,
+  onChangeAge,
+  onChangeCity,
+  onChangeUsername,
+  onChangeAvatar,
 }) => {
   const { t } = useTranslation('profile');
+
+  const mods: Mods = {
+    [cls.editing]: !readonly,
+  };
 
   if (isLoading) {
     return (
@@ -54,25 +73,33 @@ export const ProfileCard: FC<Props> = ({
   }
 
   return (
-    <div className={classNames(cls.profileCard, {}, [className])}>
+    <div className={classNames(cls.profileCard, mods, [className])}>
       <div className={cls.data}>
+        {data?.avatar && (
+          <div className={cls.avatarWrapper}>
+            <Avatar src={data.avatar} alt={data.username} />
+          </div>
+        )}
         <Input
           className={cls.input}
           value={data?.first}
           placeholder={t('Ваше имя')}
           readonly={readonly}
+          onChange={onChangeFirstName}
         />
         <Input
           className={cls.input}
           value={data?.lastname}
           placeholder={t('Ваше фамилия')}
           readonly={readonly}
+          onChange={onChangeLastName}
         />
         <Input
           className={cls.input}
           value={data?.age?.toString()}
           placeholder={t('Ваш возраст')}
           readonly={readonly}
+          onChange={onChangeAge}
         />
         <Input
           className={cls.input}
@@ -85,17 +112,26 @@ export const ProfileCard: FC<Props> = ({
           value={data?.city}
           placeholder={t('Город проживания')}
           readonly={readonly}
+          onChange={onChangeCity}
         />
         <Input
           className={cls.input}
           value={data?.username}
           placeholder={t('Ваш nickname')}
+          onChange={onChangeUsername}
           readonly={readonly}
         />
         <Input
           className={cls.input}
           value={data?.currency}
           placeholder={t('Ваша валюта')}
+          readonly={readonly}
+        />
+        <Input
+          className={cls.input}
+          value={data?.avatar}
+          placeholder={t('Ваш аватар')}
+          onChange={onChangeAvatar}
           readonly={readonly}
         />
       </div>

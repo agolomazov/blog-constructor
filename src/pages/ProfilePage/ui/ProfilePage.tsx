@@ -1,14 +1,15 @@
 import { useAppSelector } from 'app/providers/StoreProvider';
 import {
   fetchProfileData,
-  getProfileData,
   getProfileError,
+  getProfileForm,
   getProfileIsLoading,
   getProfileReadonly,
+  profileActions,
   ProfileCard,
   profileReducer,
 } from 'entities/Profile';
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { classNames } from 'shared/lib/classNames';
 import {
@@ -27,7 +28,7 @@ const reducers: ReducersList = {
 
 const ProfilePage: FC<Props> = ({ className }) => {
   const dispatch = useDispatch();
-  const data = useAppSelector(getProfileData);
+  const data = useAppSelector(getProfileForm);
   const isLoading = useAppSelector(getProfileIsLoading);
   const error = useAppSelector(getProfileError);
   const readonly = useAppSelector(getProfileReadonly);
@@ -35,6 +36,72 @@ const ProfilePage: FC<Props> = ({ className }) => {
   useEffect(() => {
     dispatch(fetchProfileData());
   }, [dispatch]);
+
+  const handleChangeFirstName = useCallback(
+    (value?: string) => {
+      dispatch(
+        profileActions.updateProfile({
+          first: value || '',
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleChangeLastName = useCallback(
+    (value?: string) => {
+      dispatch(
+        profileActions.updateProfile({
+          lastname: value || '',
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleChangeCity = useCallback(
+    (value?: string) => {
+      dispatch(
+        profileActions.updateProfile({
+          city: value || '',
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleChangeAge = useCallback(
+    (value?: string) => {
+      dispatch(
+        profileActions.updateProfile({
+          age: Number(value || 0),
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleChangeUsername = useCallback(
+    (value?: string) => {
+      dispatch(
+        profileActions.updateProfile({
+          username: value || '',
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleChangeAvatar = useCallback(
+    (value?: string) => {
+      dispatch(
+        profileActions.updateProfile({
+          avatar: value || '',
+        })
+      );
+    },
+    [dispatch]
+  );
 
   return (
     <DynamicComponentLoader reducers={reducers} removeAfterUnmount>
@@ -45,6 +112,12 @@ const ProfilePage: FC<Props> = ({ className }) => {
           isLoading={isLoading}
           error={error}
           readonly={readonly}
+          onChangeFirstName={handleChangeFirstName}
+          onChangeLastName={handleChangeLastName}
+          onChangeAge={handleChangeAge}
+          onChangeCity={handleChangeCity}
+          onChangeAvatar={handleChangeAvatar}
+          onChangeUsername={handleChangeUsername}
         />
       </div>
     </DynamicComponentLoader>

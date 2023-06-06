@@ -1,5 +1,9 @@
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import { getProfileReadonly, profileActions } from 'entities/Profile';
+import {
+  getProfileReadonly,
+  profileActions,
+  updateProfileData,
+} from 'entities/Profile';
 import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames';
@@ -20,8 +24,12 @@ export const ProfilePageHeader: FC<Props> = ({ className }) => {
     dispatch(profileActions.setReadonly(false));
   }, [dispatch]);
 
-  const handleSaveOrCancel = useCallback(() => {
-    dispatch(profileActions.setReadonly(true));
+  const handleOnCancelEdit = useCallback(() => {
+    dispatch(profileActions.cancelEdit());
+  }, [dispatch]);
+
+  const handleOnSave = useCallback(() => {
+    dispatch(updateProfileData());
   }, [dispatch]);
 
   return (
@@ -45,7 +53,7 @@ export const ProfilePageHeader: FC<Props> = ({ className }) => {
                 cls.actionBtn,
               ])}
               theme={ButtonTheme.OUTLINE}
-              onClick={handleSaveOrCancel}
+              onClick={handleOnSave}
             >
               {t('Сохранить')}
             </Button>
@@ -54,8 +62,8 @@ export const ProfilePageHeader: FC<Props> = ({ className }) => {
                 cls.editBtn,
                 cls.actionBtn,
               ])}
-              theme={ButtonTheme.OUTLINE}
-              onClick={handleSaveOrCancel}
+              theme={ButtonTheme.OUTLINE_RED}
+              onClick={handleOnCancelEdit}
             >
               {t('Отменить')}
             </Button>
