@@ -1,5 +1,10 @@
 {
   "Профиль": "Profile",
   "Попробуйте перезагрузить страницу": "Try reloading the page",
-  "Произошла ошибка при загрузке профиля": "An error occurred while loading the profile"
+  "Произошла ошибка при загрузке профиля": "An error occurred while loading the profile",
+  "Некорректно заполнены данные о пользователе": "Incorrectly filled in user data",
+  "Некорректный возраст": "Incorrect age",
+  "Некорректная страна": "Incorrect country",
+  "Данные о пользователе пусты": "User data is empty",
+  "Серверная ошибка": "Server error"
 }

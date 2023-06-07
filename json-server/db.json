@@ -26,8 +26,8 @@
     }
   ],
   "profile": {
-    "first": "Антон",
-    "lastname": "Голомазов",
+    "first": "Голомазов",
+    "lastname": "Антон",
     "age": 35,
     "currency": "RUB",
     "country": "Russia",
