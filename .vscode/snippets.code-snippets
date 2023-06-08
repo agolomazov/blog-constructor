@@ -19,7 +19,7 @@
       "",
       "export const ${1:${TM_FILENAME_BASE}}: FC<Props> = ({ className, children }) => {",
       "\treturn (",
-      "\t\t<div className={classNames(cls.${2:${TM_FILENAME_BASE/.*/${0:/downcase}/}}, {}, [className || ''])}>",
+      "\t\t<div className={classNames(cls.${2:${TM_FILENAME_BASE/.*/${0:/downcase}/}}, {}, [className])}>",
       "\t\t\t{children}$0",
       "\t\t</div>",
       "\t);",
