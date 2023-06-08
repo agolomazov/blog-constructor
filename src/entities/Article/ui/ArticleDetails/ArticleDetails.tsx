@@ -6,11 +6,12 @@ import {
   DynamicComponentLoader,
   ReducersList,
 } from 'shared/lib/components/DynamicComponentLoader/DynamicComponentLoader';
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { Text, TextTheme } from 'shared/ui/Text';
 import {
   // getArticleDetailsData,
   getArticleDetailsError,
-  getArticleDetailsIsLoading,
+  // getArticleDetailsIsLoading,
 } from '../../model/selectors/articleDetails';
 import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
@@ -28,7 +29,8 @@ const initialReducers: ReducersList = {
 export const ArticleDetails = memo(({ className, id }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(getArticleDetailsIsLoading);
+  // const isLoading = useAppSelector(getArticleDetailsIsLoading);
+  const isLoading = true;
   // const data = useAppSelector(getArticleDetailsData);
   const error = useAppSelector(getArticleDetailsError);
 
@@ -39,7 +41,21 @@ export const ArticleDetails = memo(({ className, id }: Props) => {
   let content;
 
   if (isLoading) {
-    content = <div>{t('Загрузка...')}</div>;
+    content = (
+      <div>
+        <Skeleton
+          width={200}
+          height={200}
+          border="50%"
+          className={cls.avatar}
+        />
+        <Skeleton width={300} height={24} className={cls.title} />
+        <Skeleton width={600} height={24} className={cls.skeleton} />
+        <Skeleton width={200} height={200} className={cls.skeleton} />
+        <Skeleton width="100%" height={200} className={cls.skeleton} />
+        <Skeleton width="100%" height={200} className={cls.skeleton} />
+      </div>
+    );
   } else if (error) {
     content = (
       <Text
