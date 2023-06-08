@@ -2,8 +2,13 @@
   min-height: 100%;
 }
 
+.avatarWrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .avatar {
-  margin: auto;
+  display: inherit;
 }
 
 .title {
@@ -12,4 +17,18 @@
 
 .skeleton {
   margin-top: 15px;
+}
+
+.articleInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.block {
+  margin-top: 20px;
 }
