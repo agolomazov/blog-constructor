@@ -1,11 +1,10 @@
 import { useAppSelector } from 'app/providers/StoreProvider';
-import { getUserAuthData } from 'entities/User';
-import { memo, useMemo, useState } from 'react';
+import { memo, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/LangSwitcher';
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
-import { SidebarItemsList } from '../../model/items';
+import { getSidebarItems } from 'widgets/Sidebar/model/selectors/getSidebarItems';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import cls from './Sidebar.module.scss';
 
@@ -15,19 +14,7 @@ interface SidebarProps {
 
 export const Sidebar = memo(({ className }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
-  const isAuth = useAppSelector(getUserAuthData);
-
-  const sidebarLinks = useMemo(
-    () =>
-      SidebarItemsList.filter((item) => {
-        if (item?.authOnly && !isAuth) {
-          return false;
-        }
-
-        return true;
-      }),
-    [isAuth]
-  );
+  const sidebarLinks = useAppSelector(getSidebarItems);
 
   const onToggle = () => {
     setCollapsed((prev) => !prev);
