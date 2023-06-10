@@ -1,10 +1,12 @@
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import {
+  getProfileData,
   getProfileReadonly,
   profileActions,
   updateProfileData,
 } from 'entities/Profile';
-import { FC, useCallback } from 'react';
+import { getUserAuthData } from 'entities/User';
+import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
@@ -15,10 +17,12 @@ interface Props {
   className?: string;
 }
 
-export const ProfilePageHeader: FC<Props> = ({ className }) => {
+export const ProfilePageHeader = memo(({ className }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const readonly = useAppSelector(getProfileReadonly);
+  const authUser = useAppSelector(getUserAuthData);
+  const profileData = useAppSelector(getProfileData);
 
   const handleEdit = useCallback(() => {
     dispatch(profileActions.setReadonly(false));
@@ -31,6 +35,10 @@ export const ProfilePageHeader: FC<Props> = ({ className }) => {
   const handleOnSave = useCallback(() => {
     dispatch(updateProfileData());
   }, [dispatch]);
+
+  if (authUser?.id !== profileData?.id) {
+    return null;
+  }
 
   return (
     <div className={classNames(cls.profilePageHeader, {}, [className || ''])}>
@@ -72,4 +80,4 @@ export const ProfilePageHeader: FC<Props> = ({ className }) => {
       </div>
     </div>
   );
-};
+});

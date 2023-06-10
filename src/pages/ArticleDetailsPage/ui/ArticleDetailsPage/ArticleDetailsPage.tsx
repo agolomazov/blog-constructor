@@ -1,5 +1,5 @@
 import { ArticleDetails } from 'entities/Article';
-import { FC, memo, useEffect } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames';
@@ -12,6 +12,8 @@ import {
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { fetchCommentsByArticleId } from 'pages/ArticleDetailsPage/model/services/fetchCommentByArticleId';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
+import { AddCommentForm, getAddCommentFormText } from 'features/AddCommentForm';
+import { addCommentForArticle } from '../../model/services/addCommentForArticle';
 import {
   articleDetailsCommentsReducer,
   getArticleComments,
@@ -33,10 +35,17 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
   const dispatch = useAppDispatch();
   const comments = useAppSelector(getArticleComments.selectAll);
   const commentsIsLoading = useAppSelector(getArticleCommentsIsLoading);
+  const commentText = useAppSelector(getAddCommentFormText);
 
   useEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
   }, [dispatch, id]);
+
+  const handleAddComment = useCallback(() => {
+    if (commentText) {
+      dispatch(addCommentForArticle(commentText));
+    }
+  }, [dispatch, commentText]);
 
   if (!id) {
     return (
@@ -59,6 +68,10 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
             className={cls.commentsHeader}
           />
         )}
+        <AddCommentForm
+          className={cls.addCommentForm}
+          onSendComment={handleAddComment}
+        />
         <CommentList
           className={cls.comments}
           comments={comments}

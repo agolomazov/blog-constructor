@@ -8,3 +8,6 @@ export const getArticleDetailsIsLoading = (state: StateSchema) =>
 
 export const getArticleDetailsError = (state: StateSchema) =>
   state.articleDetails?.error;
+
+export const getArticleDetailsArticleId = (state: StateSchema) =>
+  state.articleDetails?.data?.id;
