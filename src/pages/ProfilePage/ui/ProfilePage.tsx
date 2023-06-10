@@ -16,6 +16,7 @@ import { ValidateProfileError } from 'entities/Profile/model/types/profile';
 import { FC, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames';
 import {
   DynamicComponentLoader,
@@ -40,6 +41,7 @@ const ProfilePage: FC<Props> = ({ className }) => {
   const error = useAppSelector(getProfileError);
   const readonly = useAppSelector(getProfileReadonly);
   const validateErrors = useAppSelector(getProfileValidateErrors);
+  const { id } = useParams<{ id: string }>();
 
   const validateTranslateErrors: Record<ValidateProfileError, string> = {
     [ValidateProfileError.INCORRECT_USER_DATA]: t(
@@ -52,8 +54,10 @@ const ProfilePage: FC<Props> = ({ className }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchProfileData());
-  }, [dispatch]);
+    if (id) {
+      dispatch(fetchProfileData(id));
+    }
+  }, [dispatch, id]);
 
   const handleChangeFirstName = useCallback(
     (value?: string) => {

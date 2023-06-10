@@ -11,15 +11,13 @@ import {
 } from 'shared/lib/components/DynamicComponentLoader/DynamicComponentLoader';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { fetchCommentsByArticleId } from 'pages/ArticleDetailsPage/model/services/fetchCommentByArticleId';
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import {
   articleDetailsCommentsReducer,
   getArticleComments,
 } from '../../model/slices/articleDetailsCommentsSlice';
 import cls from './ArticleDetailsPage.module.scss';
-import {
-  // getArticleCommentsError,
-  getArticleCommentsIsLoading,
-} from '../../model/selectors/comments';
+import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 
 const reducers: ReducersList = {
   articleDetailsComments: articleDetailsCommentsReducer,
@@ -35,7 +33,6 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
   const dispatch = useAppDispatch();
   const comments = useAppSelector(getArticleComments.selectAll);
   const commentsIsLoading = useAppSelector(getArticleCommentsIsLoading);
-  // const commentsError = useAppSelector(getArticleCommentsError);
 
   useEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
@@ -53,10 +50,15 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
     <DynamicComponentLoader reducers={reducers} removeAfterUnmount>
       <div className={classNames(cls.articleDetailsPage, {}, [className])}>
         <ArticleDetails id={id} />
-        <Text
-          title={`${t('Комментарии')} (${comments.length})`}
-          className={cls.commentsHeader}
-        />
+        {commentsIsLoading && (
+          <Skeleton width="100%" height="40px" className={cls.commentsHeader} />
+        )}
+        {!commentsIsLoading && (
+          <Text
+            title={`${t('Комментарии')} (${comments.length})`}
+            className={cls.commentsHeader}
+          />
+        )}
         <CommentList
           className={cls.comments}
           comments={comments}

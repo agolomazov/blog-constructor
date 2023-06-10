@@ -9,3 +9,4 @@ export { getProfileError } from './model/selectors/getProfileError/getProfileErr
 export { getProfileReadonly } from './model/selectors/getProfileReadonly/getProfileReadonly';
 export { getProfileForm } from './model/selectors/getProfileForm/getProfileForm';
 export { getProfileValidateErrors } from './model/selectors/getProfileValidateError/getProfileValidateError';
+export { getProfileId } from './model/selectors/getprofileId/getProfileId';
