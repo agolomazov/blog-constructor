@@ -1,4 +1,6 @@
-import { FC, memo, useCallback } from 'react';
+import { useAppDispatch } from 'app/providers/StoreProvider';
+import { fetchArticlesList } from 'pages/ArticlesPage/model/services/fetchArticlesList';
+import { FC, memo, useCallback, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames';
 import { Article, ArticleView } from '../../model/types/article';
 import { ArticleListItemMemo as ArticleListItem } from '../ArticleListItem/ArticleListItem';
@@ -19,7 +21,12 @@ const getSkeletons = (view: ArticleView) =>
   ));
 
 const ArticleList: FC<Props> = (props) => {
-  const { className, articles, view = 'big', isLoading } = props;
+  const { className, articles, view = 'small', isLoading } = props;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchArticlesList());
+  }, [dispatch]);
 
   const renderArticle = useCallback(
     (article: Article) => (
