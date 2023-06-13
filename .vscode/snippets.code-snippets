@@ -9,7 +9,7 @@
   "Create a React component": {
     "prefix": "rfc",
     "body": [
-      "import { FC } from 'react';",
+      "import { FC, memo } from 'react';",
       "import { classNames } from \"shared/lib/classNames\";",
       "import cls from './${TM_FILENAME_BASE}.module.scss';",
       "",
@@ -17,15 +17,16 @@
       "\tclassName?: string;",
       "}",
       "",
-      "export const ${1:${TM_FILENAME_BASE}}: FC<Props> = (props) => {",
-      "\tconst {$3} = props;",
+      "const ${1:${TM_FILENAME_BASE}}: FC<Props> = (props) => {",
+      "\tconst {className, $3} = props;",
       "\treturn (",
       "\t\t<div className={classNames(cls.${2:${TM_FILENAME_BASE/.*/${0:/downcase}/}}, {}, [className])}>",
-      "\t\t\t{children}$0",
+      "\t\t\t${TM_FILENAME_BASE}",
       "\t\t</div>",
       "\t);",
       "};",
-      ""
+      "",
+      "export const ${1:${TM_FILENAME_BASE}}Memo = memo(${1:${TM_FILENAME_BASE}})"
     ],
     "description": "Create a React functional component using TypeScript and SCSS modules"
   },

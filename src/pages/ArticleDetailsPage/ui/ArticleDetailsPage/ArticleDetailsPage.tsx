@@ -1,6 +1,6 @@
 import { ArticleDetails } from 'entities/Article';
 import { FC, memo, useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames';
 import { Text } from 'shared/ui/Text';
@@ -13,6 +13,8 @@ import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { fetchCommentsByArticleId } from 'pages/ArticleDetailsPage/model/services/fetchCommentByArticleId';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { AddCommentForm, getAddCommentFormText } from 'features/AddCommentForm';
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle';
 import {
   articleDetailsCommentsReducer,
@@ -33,6 +35,7 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
   const { t } = useTranslation('article-details');
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const comments = useAppSelector(getArticleComments.selectAll);
   const commentsIsLoading = useAppSelector(getArticleCommentsIsLoading);
   const commentText = useAppSelector(getAddCommentFormText);
@@ -47,6 +50,10 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
     }
   }, [dispatch, commentText]);
 
+  const handleBackToListArticles = useCallback(() => {
+    navigate(RoutePath.articles);
+  }, [navigate]);
+
   if (!id) {
     return (
       <div className={classNames(cls.articleDetailsPage, {}, [className])}>
@@ -58,6 +65,9 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
   return (
     <DynamicComponentLoader reducers={reducers} removeAfterUnmount>
       <div className={classNames(cls.articleDetailsPage, {}, [className])}>
+        <Button theme={ButtonTheme.OUTLINE} onClick={handleBackToListArticles}>
+          {t('Назад к списку')}
+        </Button>
         <ArticleDetails id={id} />
         {commentsIsLoading && (
           <Skeleton width="100%" height="40px" className={cls.commentsHeader} />

@@ -1,0 +1,124 @@
+.articleListItem {
+  background: transparent;
+}
+
+.big {
+  .header {
+    display: flex;
+    align-items: center;
+  }
+
+  .username {
+    margin-left: 8px;
+  }
+
+  .date {
+    margin-left: auto;
+  }
+
+  .views {
+    margin-left: auto;
+  }
+
+  .title {
+    margin-top: 8px;
+  }
+
+  .img {
+    max-height: 250px;
+    width: 100%;
+    object-fit: cover;
+    margin: 16px 0;
+  }
+
+  .textBlock {
+    max-height: 200px;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      display: flex;
+      pointer-events: none;
+      height: 200px;
+      width: 1550px;
+      z-index: 2;
+      background: rgb(255, 255, 255);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(246, 246, 246, 1) 100%
+      );
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.small {
+  opacity: 0.8;
+  transition: all 0.3s ease-in;
+  width: 230px;
+
+  .imageWrapper {
+    width: 200px;
+    height: 200px;
+    position: relative;
+  }
+
+  .img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .date {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  .infoWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .types p {
+    width: 115px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .views {
+    margin-left: auto;
+  }
+
+  .title p {
+    margin-top: 8px;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+    transform: scale(1.01);
+
+    .date {
+      opacity: 1;
+    }
+  }
+}
