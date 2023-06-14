@@ -62,7 +62,8 @@ module.exports = {
     ],
     'no-undef': 'off',
     'implicit-arrow-linebreak': 'off',
-    'consistent-return': 'off'
+    'consistent-return': 'off',
+    'function-paren-newline': 'off'
   },
   globals: {
     __IS_DEV__: true,
