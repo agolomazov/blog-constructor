@@ -3,6 +3,7 @@ import { ReduxStoreWithManager } from 'app/providers/StoreProvider';
 import { StateSchemaKeys } from 'app/providers/StoreProvider/config/StateSchema';
 import { FC, useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
+import { logger } from 'shared/lib/logger';
 
 export type ReducersList = {
   [name in StateSchemaKeys]?: Reducer;
@@ -21,9 +22,15 @@ export const DynamicComponentLoader: FC<DynamicComponentLoaderProps> = (
   const store = useStore() as ReduxStoreWithManager;
 
   useEffect(() => {
+    const mountedReducers = store.reducerManager.getReducerMap();
     Object.entries(reducers).forEach(([name, reducer]) => {
-      store.reducerManager.add(name as StateSchemaKeys, reducer);
-      dispatch({ type: `@INIT ${name} reducer` });
+      const mounted = mountedReducers[name as StateSchemaKeys];
+
+      // Добавляем новый редюсер, если он ещё не вмонтирован
+      if (!mounted) {
+        store.reducerManager.add(name as StateSchemaKeys, reducer);
+        dispatch({ type: `@INIT ${name} reducer` });
+      }
     });
 
     return () => {

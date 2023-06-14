@@ -8,8 +8,6 @@ import {
   getArticlesPageIsLoading,
   getArticlesPageView,
 } from 'pages/ArticlesPage/model/selectors/articles';
-import { fetchArticlesList } from 'pages/ArticlesPage/model/services/fetchArticlesList';
-import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage';
 import { FC, memo, useCallback, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames';
 import {
@@ -17,6 +15,8 @@ import {
   ReducersList,
 } from 'shared/lib/components/DynamicComponentLoader/DynamicComponentLoader';
 import { Page } from 'shared/ui/Page';
+import { initArticlesPage } from '../../model/services/initArticlesPage';
+import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage';
 import {
   articlesPageActions,
   articlesPageReducer,
@@ -50,12 +50,11 @@ const ArticlesPage: FC<Props> = ({ className }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(articlesPageActions.initState());
-    dispatch(fetchArticlesList({ page: 1 }));
+    dispatch(initArticlesPage());
   }, [dispatch]);
 
   return (
-    <DynamicComponentLoader reducers={reducers} removeAfterUnmount>
+    <DynamicComponentLoader reducers={reducers}>
       <Page
         className={classNames(cls.articlesPage, {}, [className || ''])}
         onScrollEnd={handleOnLoadNextPage}
