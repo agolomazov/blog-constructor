@@ -66,7 +66,7 @@ const Page: FC<Props> = (props) => {
       onScroll={handlerScrollPage}
     >
       {children}
-      <div ref={triggerRef} className={cls.loadMore} />
+      {onScrollEnd && <div ref={triggerRef} className={cls.loadMore} />}
     </section>
   );
 };
