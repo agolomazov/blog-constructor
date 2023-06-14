@@ -22,6 +22,7 @@ import {
   DynamicComponentLoader,
   ReducersList,
 } from 'shared/lib/components/DynamicComponentLoader/DynamicComponentLoader';
+import { Page } from 'shared/ui/Page';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
@@ -149,7 +150,7 @@ const ProfilePage: FC<Props> = ({ className }) => {
 
   return (
     <DynamicComponentLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames('', {}, [className])}>
+      <Page className={classNames('', {}, [className])}>
         <ProfilePageHeader />
         {validateErrors?.length > 0
           && validateErrors.map((err) => (
@@ -173,7 +174,7 @@ const ProfilePage: FC<Props> = ({ className }) => {
           onChangeCurrency={handleChangeCurrency}
           onChangeCountry={handleChangeCountry}
         />
-      </div>
+      </Page>
     </DynamicComponentLoader>
   );
 };

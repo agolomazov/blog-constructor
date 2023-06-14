@@ -15,6 +15,7 @@ import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { AddCommentForm, getAddCommentFormText } from 'features/AddCommentForm';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { Page } from 'shared/ui/Page';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle';
 import {
   articleDetailsCommentsReducer,
@@ -64,7 +65,7 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
 
   return (
     <DynamicComponentLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames(cls.articleDetailsPage, {}, [className])}>
+      <Page className={classNames(cls.articleDetailsPage, {}, [className])}>
         <Button theme={ButtonTheme.OUTLINE} onClick={handleBackToListArticles}>
           {t('Назад к списку')}
         </Button>
@@ -87,7 +88,7 @@ const ArticleDetailsPage: FC<Props> = ({ className }) => {
           comments={comments}
           isLoading={commentsIsLoading}
         />
-      </div>
+      </Page>
     </DynamicComponentLoader>
   );
 };
