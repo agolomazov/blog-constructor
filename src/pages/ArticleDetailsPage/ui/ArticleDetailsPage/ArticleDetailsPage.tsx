@@ -15,7 +15,7 @@ import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { AddCommentForm, getAddCommentFormText } from 'features/AddCommentForm';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import { Page } from 'shared/ui/Page';
+import { Page } from 'widgets/Page';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle';
 import {
   articleDetailsCommentsReducer,

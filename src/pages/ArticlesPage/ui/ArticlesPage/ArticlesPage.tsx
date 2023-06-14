@@ -14,7 +14,7 @@ import {
   DynamicComponentLoader,
   ReducersList,
 } from 'shared/lib/components/DynamicComponentLoader/DynamicComponentLoader';
-import { Page } from 'shared/ui/Page';
+import { Page } from 'widgets/Page';
 import { initArticlesPage } from '../../model/services/initArticlesPage';
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage';
 import {

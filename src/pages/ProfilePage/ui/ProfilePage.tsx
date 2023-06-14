@@ -22,7 +22,7 @@ import {
   DynamicComponentLoader,
   ReducersList,
 } from 'shared/lib/components/DynamicComponentLoader/DynamicComponentLoader';
-import { Page } from 'shared/ui/Page';
+import { Page } from 'widgets/Page';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
